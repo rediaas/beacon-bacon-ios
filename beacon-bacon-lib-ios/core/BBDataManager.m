@@ -248,7 +248,7 @@
     
     [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [req setValue:[NSString stringWithFormat:@"Bearer %@", BB_API_KEY] forHTTPHeaderField:@"Authorization"];
+    [req setValue:[NSString stringWithFormat:@"Bearer %@", [BBConfig sharedConfig].apiKey] forHTTPHeaderField:@"Authorization"];
 
     [req setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     
