@@ -2,10 +2,10 @@
 
 ## GET STARTED
 
-1. Request an API Key from https://beaconbacon.nosuchagency.com <br>(Read how to get setup Places / Points of Interest / Beacons etc. [here](https://github.com/nosuchagency/beacon-bacon))
-2. BBConfig.h -> BB_API_KEY -> Insert your API Key
-3. Import the lib into your project (Objective-C) [beacon-bacon-lib-ios](https://github.com/mustachedk/beacon-bacon-ios/tree/master/beacon-bacon-lib-ios)
-4. Import CoreLocation.framework into Linked Frameworks and Libraries
+1. Setup your own BeaconBacon Server and get an API Key<br>(Read how to setup Places / Points of Interest / Beacons etc. [here](https://github.com/nosuchagency/beacon-bacon))
+2. Import the beacon-bacon-ios lib into your project (Objective-C) [beacon-bacon-lib-ios](https://github.com/mustachedk/beacon-bacon-ios/tree/master/beacon-bacon-lib-ios)
+3. Import CoreLocation.framework into Linked Frameworks and Libraries
+4. Follow the instructions below to get started!
 
 You are now able to use the lib. 
 You can either use your own integration with API using element from the [./core](https://github.com/mustachedk/beacon-bacon-ios/tree/master/beacon-bacon-lib-ios/core) folder.
@@ -13,7 +13,7 @@ You can also use the default UI for wayfinding [./wayfinding](https://github.com
 
 ## USING WAYFINDING
 
-You can see an example in [Beacon Bacon IOS Demo](https://github.com/mustachedk/beacon-bacon-ios-demo)
+You can see an example in using the default wayfinding UI [Beacon Bacon IOS Demo](https://github.com/mustachedk/beacon-bacon-ios-demo)
 
 ####Configurate API and UI:
 ```Objective-C
