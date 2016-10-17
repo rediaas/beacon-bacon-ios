@@ -37,7 +37,7 @@
         _sharedConfig.lightFont      = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:BB_STORE_KEY_LIGHT_FONT]];
         _sharedConfig.apiKey         = [[NSUserDefaults standardUserDefaults] valueForKey:BB_STORE_KEY_API_KEY];
         _sharedConfig.apiBaseURL     = [[NSUserDefaults standardUserDefaults] valueForKey:BB_STORE_KEY_API_BASE_URL];
-
+        _sharedConfig.SSLPinningMode = BBSSLPinningModeNone;
     });
     return _sharedConfig;
 }
@@ -106,7 +106,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     _apiBaseURL = apiBaseURL;
 }
-
 
 
 @end

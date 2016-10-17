@@ -36,14 +36,26 @@
 #define BB_STORE_KEY_REGULAR_FONT       @"BB_STORE_KEY_REGULAR_FONT"
 #define BB_STORE_KEY_LIGHT_FONT         @"BB_STORE_KEY_LIGHT_FONT"
 
+
+typedef NS_ENUM(NSUInteger, BBSSLPinningMode) {
+    BBSSLPinningModeNone,
+    BBSSLPinningModePublicKey
+};
+
+// IMPORTANT: ´apiKey´, ´apiBaseURL´& ´currentPlaceId´ has to be configured
 @property (nonatomic, copy) NSString *apiKey;
 @property (nonatomic, copy) NSString *apiBaseURL;
 @property (nonatomic, copy) NSString *currentPlaceId;
 
+// Default color is [UIColor darkGrayColor];
 @property (nonatomic, strong) UIColor  *customColor;
 
+// Default fonts are both [UIFont systemFontOfSize:16.f];
 @property (nonatomic, strong) UIFont  *regularFont;
 @property (nonatomic, strong) UIFont  *lightFont;
+
+// Default SSL Pinning Mode is BBSSLPinningModeNone
+@property (nonatomic, assign) BBSSLPinningMode SSLPinningMode;
 
 + (instancetype)sharedConfig;
 
