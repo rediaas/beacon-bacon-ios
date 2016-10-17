@@ -15,21 +15,23 @@ You can also use the default UI for wayfinding [./wayfinding](https://github.com
 
 You can see an example in [Beacon Bacon IOS Demo](https://github.com/mustachedk/beacon-bacon-ios-demo)
 
-####Start using a specific 'Place':
+####Configurate API and UI:
 ```Objective-C
-[[BBConfig sharedConfig] setupWithPlaceIdentifier:@"YOUR_PLACE_ID" withCompletion:^(NSString *placeIdentifier, NSError *error) { 
-   ...
-}];
-```
-
-####Configure setup:
-```Objective-C
+// Configuration API Connection
 [BBConfig sharedConfig].apiBaseURL  = @"INSERT_YOUR_API_BASE_URL";
 [BBConfig sharedConfig].apiKey      = @"INSERT_YOUR_API_KEY";
 
+// Configurate UI
 [BBConfig sharedConfig].customColor = [UIColor orangeColor];
 [BBConfig sharedConfig].regularFont = [UIFont fontWithName:@"Avenir-Regular" size:16];
 [BBConfig sharedConfig].lightFont   = [UIFont fontWithName:@"Avenir-Light" size:16];
+```
+
+####Start using a specific 'Place':
+```Objective-C
+[[BBConfig sharedConfig] setupWithPlaceIdentifier:@"YOUR_PLACE_ID" withCompletion:^(NSString *placeIdentifier, NSError *error) { 
+...
+}];
 ```
 
 ####Initiate map without wayfinding:
