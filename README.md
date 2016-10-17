@@ -22,8 +22,11 @@ You can see an example in [Beacon Bacon IOS Demo](https://github.com/mustachedk/
 }];
 ```
 
-####Configure the UI:
+####Configure setup:
 ```Objective-C
+[BBConfig sharedConfig].apiBaseURL  = @"INSERT_YOUR_API_BASE_URL";
+[BBConfig sharedConfig].apiKey      = @"INSERT_YOUR_API_KEY";
+
 [BBConfig sharedConfig].customColor = [UIColor orangeColor];
 [BBConfig sharedConfig].regularFont = [UIFont fontWithName:@"Avenir-Regular" size:16];
 [BBConfig sharedConfig].lightFont   = [UIFont fontWithName:@"Avenir-Light" size:16];
