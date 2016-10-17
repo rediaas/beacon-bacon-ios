@@ -229,7 +229,7 @@
         completionBlock(nil, [self errorInvalidConfiguration]);
         return;
     }
-    NSString *route = [NSString stringWithFormat:@"%@place/%@/find", BB_BASE_URL, [BBConfig sharedConfig].currentPlaceId];
+    NSString *route = [NSString stringWithFormat:@"%@place/%@/find", [BBConfig sharedConfig].apiBaseURL, [BBConfig sharedConfig].currentPlaceId];
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestDict options:NSJSONWritingPrettyPrinted error:&error];
@@ -248,7 +248,7 @@
     
     [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [req setValue:[NSString stringWithFormat:@"Bearer %@", BB_API_KEY] forHTTPHeaderField:@"Authorization"];
+    [req setValue:[NSString stringWithFormat:@"Bearer %@", [BBConfig sharedConfig].apiKey] forHTTPHeaderField:@"Authorization"];
 
     [req setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     

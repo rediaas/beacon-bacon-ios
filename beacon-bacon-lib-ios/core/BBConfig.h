@@ -29,15 +29,17 @@
 
 @interface BBConfig : NSObject
 
-#define BB_API_KEY  @"INSERT_YOUR_API_KEY_HERE"
-#define BB_BASE_URL @"https://beaconbacon.nosuchagency.com/api/v1/"
-
 #define BB_STORE_KEY_CURRENT_PLACE_ID   @"BB_STORE_KEY_CURRENT_PLACE_ID"
+#define BB_STORE_KEY_API_KEY            @"BB_STORE_KEY_API_KEY"
+#define BB_STORE_KEY_API_BASE_URL       @"BB_STORE_KEY_API_BASE_URL"
 #define BB_STORE_KEY_CUSTOM_COLOR       @"BB_STORE_KEY_CUSTOM_COLOR"
 #define BB_STORE_KEY_REGULAR_FONT       @"BB_STORE_KEY_REGULAR_FONT"
 #define BB_STORE_KEY_LIGHT_FONT         @"BB_STORE_KEY_LIGHT_FONT"
 
-@property (nonatomic, strong) NSString *currentPlaceId;
+@property (nonatomic, copy) NSString *apiKey;
+@property (nonatomic, copy) NSString *apiBaseURL;
+@property (nonatomic, copy) NSString *currentPlaceId;
+
 @property (nonatomic, strong) UIColor  *customColor;
 
 @property (nonatomic, strong) UIFont  *regularFont;
