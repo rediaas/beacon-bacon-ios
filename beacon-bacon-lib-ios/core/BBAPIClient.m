@@ -30,7 +30,7 @@
     static BBAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[BBAPIClient alloc] initWithBaseURL:[NSURL URLWithString: [BBConfig sharedConfig].apiBaseURL]];
+        _sharedClient = [[BBAPIClient alloc] initWithBaseURL:[NSURL URLWithString: [[BBConfig sharedConfig] APIURL]]];
         
         if ([BBConfig sharedConfig].SSLPinningMode == BBSSLPinningModePublicKey) {
             _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];

@@ -229,7 +229,7 @@
         completionBlock(nil, [self errorInvalidConfiguration]);
         return;
     }
-    NSString *route = [NSString stringWithFormat:@"%@place/%@/find", [BBConfig sharedConfig].apiBaseURL, [BBConfig sharedConfig].currentPlaceId];
+    NSString *route = [NSString stringWithFormat:@"%@place/%@/find", [[BBConfig sharedConfig] APIURL], [BBConfig sharedConfig].currentPlaceId];
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestDict options:NSJSONWritingPrettyPrinted error:&error];

@@ -29,13 +29,14 @@
 
 @interface BBConfig : NSObject
 
+#define BB_API_VERSION                  @"1"
+
 #define BB_STORE_KEY_CURRENT_PLACE_ID   @"BB_STORE_KEY_CURRENT_PLACE_ID"
 #define BB_STORE_KEY_API_KEY            @"BB_STORE_KEY_API_KEY"
 #define BB_STORE_KEY_API_BASE_URL       @"BB_STORE_KEY_API_BASE_URL"
 #define BB_STORE_KEY_CUSTOM_COLOR       @"BB_STORE_KEY_CUSTOM_COLOR"
 #define BB_STORE_KEY_REGULAR_FONT       @"BB_STORE_KEY_REGULAR_FONT"
 #define BB_STORE_KEY_LIGHT_FONT         @"BB_STORE_KEY_LIGHT_FONT"
-
 
 typedef NS_ENUM(NSUInteger, BBSSLPinningMode) {
     BBSSLPinningModeNone,
@@ -63,5 +64,7 @@ typedef NS_ENUM(NSUInteger, BBSSLPinningMode) {
 -(UIFont *)lightFontWithSize:(CGFloat)size;
 
 - (void) setupWithPlaceIdentifier:(NSString *)identifier withCompletion:(void (^)(NSString *placeIdentifier, NSError *error))completionBlock;
+
+- (NSString *) APIURL;
 
 @end

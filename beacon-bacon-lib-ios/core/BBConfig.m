@@ -107,5 +107,7 @@
     _apiBaseURL = apiBaseURL;
 }
 
-
+- (NSString *) APIURL {
+    return [NSString stringWithFormat:@"%@/%@/", [BBConfig sharedConfig].apiBaseURL, BB_API_VERSION];
+}
 @end
