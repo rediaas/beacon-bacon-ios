@@ -43,10 +43,10 @@ BBLibraryMapViewController *mapViewController = [[BBLibraryMapViewController all
 ####Initiate Wayfinding with a IMS Request Object (it will automatically search when you select a new place)
 ```Objective-C
 
-BBIMSRequstObject *requstObject = [[BBIMSRequstObject alloc] initWithFaustId:@"50631494"];
-requstObject.subject_name     = @"NAME_TO_DISPLAY";
-requstObject.subject_subtitle = @"SUBTITLE_TO_DISPLAY";
-requstObject.subject_image    = [UIImage imageNamed:@"menu-library-map-icon"]; // Or any other icon you want it to display, eg. a book/video/tape etc.
+BBIMSRequstObject *requstObject = [[BBIMSRequstObject alloc] initWithFaustId:@"INSERT_FAUST_IDENTIFIER"];
+requstObject.subject_name       = @"NAME_TO_DISPLAY";
+requstObject.subject_subtitle   = @"SUBTITLE_TO_DISPLAY";
+requstObject.subject_image      = [UIImage imageNamed:@"menu-library-map-icon"]; // Or any other icon you want it to display, eg. a book/video/tape etc.
     
 mapViewController = [[BBLibraryMapViewController alloc] initWithNibName:@"BBLibraryMapViewController" bundle:nil];
 mapViewController.wayfindingRequstObject = requstObject;
