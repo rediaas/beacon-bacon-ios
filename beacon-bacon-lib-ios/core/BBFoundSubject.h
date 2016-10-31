@@ -38,11 +38,6 @@
 @property (nonatomic, assign) NSInteger location_posX;
 @property (nonatomic, assign) NSInteger location_posY;
 
-// To Display
-@property (nonatomic, strong) NSString *subject_name;
-@property (nonatomic, strong) NSString *subject_subtitle;
-@property (nonatomic, strong) UIImage *subject_image;
-
 // Returns nil, if json is invalid
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 

@@ -63,8 +63,17 @@
     self.map_height_in_pixels = (NSUInteger)[[attributes valueForKeyPath:@"map_height_in_pixels"] integerValue];
     
     self.map_pixel_to_centimeter_ratio = self.map_width_in_pixels / self.map_width_in_centimeters;
-    self.map_walkable_color = [attributes valueForKeyPath:@"map_walkable_color"];
     
+    NSString *map_walkable_color = [attributes valueForKeyPath:@"map_walkable_color"];
+    if (map_walkable_color != nil && ![map_walkable_color isEqualToString:@""] ) {
+        self.map_walkable_color = [UIColor colorFromHexString:map_walkable_color];
+    }
+    
+    NSString *map_background_color = [attributes valueForKeyPath:@"map_background_color"];
+    if (map_background_color != nil && ![map_background_color isEqualToString:@""] ) {
+        self.map_background_color = [UIColor colorFromHexString:map_background_color];
+    }
+
     return self;
 }
 

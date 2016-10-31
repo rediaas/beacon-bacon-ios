@@ -1,5 +1,5 @@
 //
-// BBPOIDatasourceDelegate.m
+// BBLibraryMapPOIDatasourceDelegate.m
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,9 +22,9 @@
 // THE SOFTWARE.
 //
 
-#import "BBPOIDatasourceDelegate.h"
+#import "BBLibraryMapPOIDatasourceDelegate.h"
 
-@implementation BBPOIDatasourceDelegate
+@implementation BBLibraryMapPOIDatasourceDelegate
 
 - (BOOL) isEmpty {
     return ![self isLoading] && self.datasource.count == 0;
@@ -73,9 +73,9 @@
         return cell;
 
     } else if ([self isEmpty]) {
-        BBPOIEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BBPOIEmptyTableViewCell" forIndexPath:indexPath];
+        BBEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BBEmptyTableViewCell" forIndexPath:indexPath];
         if (cell == nil){
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"BBPOIEmptyTableViewCell" owner:self options:nil] firstObject];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"BBEmptyTableViewCell" owner:self options:nil] firstObject];
         }
         
 //        [cell setEmptyImageWithTintColor:[UIImage imageNamed:@"empty-icon-poi"]];

@@ -1,5 +1,5 @@
 //
-// BBIMSRequstSubject.h
+// BBLibrarySelectDelegate.h
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,13 +22,9 @@
 // THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@protocol BBLibrarySelectDelegate <NSObject>
 
-@interface BBIMSRequstSubject : NSObject
-
-@property (nonatomic, strong) NSString *faust;
-
-- (instancetype)initWithFaustId:(NSString *)faust;
+@required
+- (void) didSelectPlace:(BBPlace *)place;
 
 @end

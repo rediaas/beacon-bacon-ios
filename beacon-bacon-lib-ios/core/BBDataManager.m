@@ -70,47 +70,68 @@
 - (void) clearAllChacedData {
     self.cachedMenuItems = nil;
     self.cachedCurrentPlace = nil;
+    self.cachedPlaces = nil;
+}
+
+- (void) fetchAllPlacesWithCompletion:(void (^)(NSArray *places, NSError *error))completionBlock {
+    
+    if (self.cachedPlaces == nil) {
+        [[BBAPIClient sharedClient] GET:@"place/" parameters:nil progress:nil success:^(NSURLSessionDataTask __unused *task, id JSON) {
+            
+            NSError *error;
+            NSDictionary *attributes = [NSJSONSerialization JSONObjectWithData:JSON options:kNilOptions error:&error];
+            if (error) {
+                
+                [self clearAllChacedData];
+                completionBlock(nil, error);
+                return;
+            }
+            
+            NSArray *placesDict = attributes[@"data"];
+            NSMutableArray *places = [NSMutableArray new];
+            
+            for (NSDictionary *placeDict in placesDict) {
+                [places addObject:[[BBPlace alloc] initWithAttributes:placeDict]];
+            }
+            
+            // Apply Sort by 'order'
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            
+            self.cachedPlaces = [places sortedArrayUsingDescriptors:sortDescriptors];
+            completionBlock(self.cachedPlaces, nil);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            [self clearAllChacedData];
+            completionBlock(nil, error);
+        }];
+    } else {
+        // Return Cache
+        completionBlock(self.cachedPlaces, nil);
+    }
 }
 
 - (void) fetchPlaceIdFromIdentifier:(NSString *)identifier withCompletion:(void (^)(NSString *placeIdentifier, NSError *error))completionBlock {
     
-    [[BBAPIClient sharedClient] GET:@"place/" parameters:nil progress:nil success:^(NSURLSessionDataTask __unused *task, id JSON) {
-        
-        NSError *error;
-        NSDictionary *attributes = [NSJSONSerialization JSONObjectWithData:JSON options:kNilOptions error:&error];
-        if (error) {
-            
-            [self clearAllChacedData];
-            completionBlock(nil, error);
-            return;
-        }
-        
-        NSArray *places = attributes[@"data"];
-        if (!places) {
-            
-            [self clearAllChacedData];
-            completionBlock(false, [self errorInvalidResponse]);
-            return;
-        }
-        for (NSDictionary *placeAttributes in places) {
-            if ([placeAttributes[@"identifier"] isEqualToString:identifier]) {
-                NSString *currentPlaceId = [NSString stringWithFormat:@"%ld", (unsigned long)[[placeAttributes valueForKeyPath:@"id"] integerValue]];
-               
-                [self clearAllChacedData];
-                completionBlock(currentPlaceId, nil);
-                return;
+    [self fetchAllPlacesWithCompletion:^(NSArray *places, NSError *error) {
+        if (error == nil) {
+            for (BBPlace *place in places) {
+                if ([place.identifier isEqualToString:identifier]) {
+                    NSString *currentPlaceId = [NSString stringWithFormat:@"%ld", place.place_id];
+                    
+                    [self clearAllChacedData];
+                    completionBlock(currentPlaceId, nil);
+                    return;
+                }
             }
+            
+            [self clearAllChacedData];
+            completionBlock(nil, [self errorUnsupportedPlace]);
+        } else {
+            completionBlock(nil, error);
         }
-        
-        [self clearAllChacedData];
-        completionBlock(nil, [self errorUnsupportedPlace]);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-       
-        [self clearAllChacedData];
-        completionBlock(nil, error);
     }];
-    
 }
 
 
@@ -207,9 +228,7 @@
             } else {
                 self.cachedCurrentPlace = nil;
                 completionBlock(nil, [self errorInvalidResponse]);
-
             }
-            
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             self.cachedCurrentPlace = nil;
@@ -270,7 +289,7 @@
     }] resume];
 }
 
-- (void) requestFindIMSSubject:(BBIMSRequstSubject *)requstObject withCompletion:(void (^)(BBFoundSubject *result, NSError *error))completionBlock {
+- (void) requestFindIMSSubject:(BBIMSRequstObject *)requstObject withCompletion:(void (^)(BBFoundSubject *result, NSError *error))completionBlock {
     
     NSMutableDictionary *requestDict = [NSMutableDictionary new];
     [requestDict setObject:@"IMS" forKey:@"find_identifier"];

@@ -1,5 +1,5 @@
 //
-// BBLibraryMapPOIViewController.h
+// BBIMSRequstObject.m
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,25 +22,18 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "BBLibraryMapPOIDatasourceDelegate.h"
-#import "BBPOISection.h"
-#import "BBDataManager.h"
-#import "BBConfig.h"
+#import "BBIMSRequstObject.h"
 
-@interface BBLibraryMapPOIViewController: UIViewController
+@implementation BBIMSRequstObject
 
-// Custom Navigation/Top Bar
-@property (weak, nonatomic) IBOutlet UIView *fakeNavigationBar;
-@property (weak, nonatomic) IBOutlet UIView *topLineView;
-
-@property (weak, nonatomic) IBOutlet UIButton *closeButton;
-- (IBAction)closeButtonAction:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UILabel *navBarTitleLabel;
-
-// Other Views
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+- (instancetype)initWithFaustId:(NSString *)faust {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.faust = faust;
+      return self;
+}
 
 @end

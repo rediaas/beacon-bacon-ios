@@ -1,5 +1,5 @@
 //
-// BBIMSRequstSubject.m
+// BBIMSRequstObject.h
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,18 +22,19 @@
 // THE SOFTWARE.
 //
 
-#import "BBIMSRequstSubject.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@implementation BBIMSRequstSubject
+@interface BBIMSRequstObject : NSObject
 
-- (instancetype)initWithFaustId:(NSString *)faust {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-    
-    self.faust = faust;
-      return self;
-}
+// Used for search in backend
+@property (nonatomic, strong) NSString *faust;
+
+// To Display
+@property (nonatomic, strong) NSString *subject_name;
+@property (nonatomic, strong) NSString *subject_subtitle;
+@property (nonatomic, strong) UIImage *subject_image;
+
+- (instancetype)initWithFaustId:(NSString *)faust;
 
 @end
