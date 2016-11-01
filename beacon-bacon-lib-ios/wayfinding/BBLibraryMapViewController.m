@@ -59,6 +59,7 @@
     BOOL foundSubjectPopopViewDisplayed;
     
     BOOL shouldLayoutMap;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -745,9 +746,12 @@
     if (floorplanImageView == nil) {
         return;
     }
-    
     if ([sender numberOfTouches] >1) {
-        CGRect oldSize = floorplanImageView.bounds;
+        
+        // Do not touch this peice of magic calculation!
+        CGPoint contentOffset = self.mapScrollView.contentOffset;
+        CGPoint oldCenter = CGPointMake(contentOffset.x + self.mapScrollView.frame.size.width/2, contentOffset.y + self.mapScrollView.frame.size.height/2);
+        CGPoint originalPoint = CGPointMake(oldCenter.x / scaleRatio, oldCenter.y / scaleRatio);
         
         myCurrentLocationView.hidden = YES;
         
@@ -757,13 +761,13 @@
         double newScaleRatio = scaleRatio * (1.0 - ((1.0 - sender.scale) / 10));
         scaleRatio = newScaleRatio >= maxScale ? maxScale : newScaleRatio <= minScale ? minScale : newScaleRatio;
         
+        
         floorplanImageView.frame = CGRectMake(0, 0, floorplanImageView.image.size.width * scaleRatio, floorplanImageView.image.size.height * scaleRatio);
         self.mapScrollView.contentSize = floorplanImageView.bounds.size;
+
+        CGPoint newCenter = CGPointMake(originalPoint.x * scaleRatio, originalPoint.y * scaleRatio);
         
-        float deltaWidth = floorplanImageView.frame.size.width - oldSize.size.width;
-        float deltaHeight = floorplanImageView.frame.size.height - oldSize.size.height;
-        
-        [self.mapScrollView setContentOffset:CGPointMake(self.mapScrollView.contentOffset.x + deltaWidth/2, self.mapScrollView.contentOffset.y + deltaHeight/2) animated:NO];
+        [self.mapScrollView setContentOffset:CGPointMake(newCenter.x - self.mapScrollView.frame.size.width/2, newCenter.y - self.mapScrollView.frame.size.height/2) animated:NO];
         
         [self layoutPOI];
         [self layoutMyLocationAnimated:YES];
