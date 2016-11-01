@@ -30,6 +30,7 @@
         return nil;
     }
     
+    self.identifier     = [attributes valueForKeyPath:@"identifier"];
     self.place_id       = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
     self.team_id        = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
     self.name           = [attributes valueForKeyPath:@"name"];
@@ -37,6 +38,8 @@
     self.address        = [attributes valueForKeyPath:@"address"];
     self.zipcode        = [attributes valueForKeyPath:@"zipcode"];
     self.city           = [attributes valueForKeyPath:@"city"];
+
+    self.order           = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
 
     NSMutableArray *tmpFloors = [NSMutableArray new];
     for (NSDictionary *floorDict in [attributes valueForKeyPath:@"floors"]) {

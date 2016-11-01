@@ -1,5 +1,5 @@
 //
-// BBLibraryMapPOIViewController.m
+// BBLibrarySelectViewController.m
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,11 +22,11 @@
 // THE SOFTWARE.
 //
 
-#import "BBLibraryMapPOIViewController.h"
+#import "BBLibrarySelectViewController.h"
 
-@implementation BBLibraryMapPOIViewController {
+@implementation BBLibrarySelectViewController {
 
-    BBLibraryMapPOIDatasourceDelegate *datasourceDelegate;
+    BBLibrarySelectDatasourceDelegate *datasourceDelegate;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,16 +45,16 @@
     self.topLineView.backgroundColor = [[BBConfig sharedConfig] customColor];
     
     self.navBarTitleLabel.font = [[BBConfig sharedConfig] lightFontWithSize:18];
-    self.navBarTitleLabel.text = NSLocalizedStringFromTable(@"points.of.interest", @"BBLocalizable", nil).uppercaseString;
+    self.navBarTitleLabel.text = NSLocalizedStringFromTable(@"change.map", @"BBLocalizable", nil).uppercaseString;
     self.navBarTitleLabel.textColor = [UIColor colorWithRed:97.0f/255.0f green:97.0f/255.0f blue:97.0f/255.0f alpha:1.0];
     
-    datasourceDelegate = [BBLibraryMapPOIDatasourceDelegate new];
-    datasourceDelegate.tableViewRef = self.tableView;
+    datasourceDelegate = [BBLibrarySelectDatasourceDelegate new];
+    datasourceDelegate.delegate = self;
     
     self.tableView.dataSource = datasourceDelegate;
     self.tableView.delegate = datasourceDelegate;
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"BBPOITableViewCell" bundle:nil] forCellReuseIdentifier:@"BBPOITableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"BBLoadingIndicatorCell" bundle:nil] forCellReuseIdentifier:@"BBLoadingIndicatorCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"BBEmptyTableViewCell" bundle:nil] forCellReuseIdentifier:@"BBEmptyTableViewCell"];
     
     [self.tableView reloadData];
@@ -71,31 +71,17 @@
 
 - (void) loadData {
     
-    [[BBDataManager sharedInstance] requestPOIMenuItemsWithCompletion:^(NSArray *result, NSError *error) {
+    [[BBDataManager sharedInstance] fetchAllPlacesWithCompletion:^(NSArray *places, NSError *error) {
         if (error == nil) {
             
-            NSMutableArray *menuSections = [NSMutableArray new];
+//            NSMutableArray *menuSections = [NSMutableArray new];
+//            for (BBPlace *place in places) {
+//                // TODO: SORT THESE FUCKERS!
+//            }
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            datasourceDelegate.datasource = [places sortedArrayUsingDescriptors:sortDescriptors];
             
-            for (BBPOIMenuItem *item in result) {
-                if (!item.isPOIMenuItem) {
-                    BBPOISection *section = [BBPOISection new];
-                    section.sectionTitle = item.title;
-                    [menuSections addObject:section];
-                }
-                else {
-                    BBPOISection *lastMenuItem = menuSections.lastObject;
-                    if (lastMenuItem != nil) {
-                        [lastMenuItem.menuItems addObject:item];
-                    }
-                    else {
-                        BBPOISection *section = [BBPOISection new];
-                        [section.menuItems addObject:item];
-                        [menuSections addObject:section];
-                    }
-                }
-            }
-            
-            datasourceDelegate.datasource = menuSections;
             [self.tableView reloadData];
         } else {
             
@@ -110,8 +96,33 @@
 #pragma mark - Actions
 
 - (IBAction)closeButtonAction:(id)sender {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - BBLibrarySelectDelegate
+
+- (void) didSelectPlace:(BBPlace *)place {
+    
+    [[BBConfig sharedConfig] setupWithPlaceIdentifier:place.identifier withCompletion:^(NSString *placeIdentifier, NSError *error) {
+        [self.tableView reloadData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BB_NOTIFICATION_MAP_NEEDS_LAYOUT object:nil];
+        
+        if (self.dismissAsSubview) {
+            [UIView animateWithDuration:0.35 animations:^{
+                [self.view setFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+                
+            } completion:^(BOOL finished) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:BB_NOTIFICATION_MAP_LAYOUT_NOW object:nil];
+                [self.view removeFromSuperview];
+                [self removeFromParentViewController];
+                
+            }];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+
+    
 }
 
 @end

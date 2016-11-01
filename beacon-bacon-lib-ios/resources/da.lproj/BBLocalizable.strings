@@ -42,10 +42,14 @@
 "no.points.of.interest.description" = "Kom tilbage senere og se om vi har tilføjet nogle interessepunkter";
 "unselect.all" = "Fravælg alle";
 
-"unsupported.place.title" = "Intet kort";
-"unsupported.place.message" = "Vi kunne desværre ikke finde noget kort for dit nuværende bibliotek.";
+"unsupported.place.title" = "Der opstod en fejl";
+"unsupported.place.message" = "Vi kan desværre ikke finde noget kort for dit nuværende bibliotek.";
 
 "error.invalid.configuration" = "Ugyldig opsætning";
 "error.unsupported.place" = "Sted ikke understøttet";
 "error.invalid.server.response" = "Fejl i svar fra server";
 "error.subject.not.found" = "Materialet blev ikke fundet";
+
+"change.map" = "Skift bibliotek";
+
+"error.wayfinding.subject.not.found.for.place" = "'%@' blev ikke fundet på %@. Du kan stadig bruge kortet, eller prøve at skifte bibliotek.";

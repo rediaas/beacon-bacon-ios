@@ -25,6 +25,8 @@
 
 @interface BBPlace : NSObject
 
+@property (nonatomic, strong) NSString *identifier;
+
 @property (nonatomic, assign) NSInteger place_id;
 @property (nonatomic, assign) NSInteger team_id;
 
@@ -32,6 +34,8 @@
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *zipcode;
 @property (nonatomic, strong) NSString *city;
+
+@property (nonatomic, assign) NSInteger order;
 
 @property (nonatomic, strong) NSArray *floors; // <BBPOIFloor>
 

@@ -1,5 +1,5 @@
 //
-// BBLibraryMapPOIViewController.h
+// BBEmptyTableViewCell.m
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,25 +22,26 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "BBLibraryMapPOIDatasourceDelegate.h"
-#import "BBPOISection.h"
-#import "BBDataManager.h"
-#import "BBConfig.h"
+#import "BBEmptyTableViewCell.h"
 
-@interface BBLibraryMapPOIViewController: UIViewController
+@implementation BBEmptyTableViewCell
 
-// Custom Navigation/Top Bar
-@property (weak, nonatomic) IBOutlet UIView *fakeNavigationBar;
-@property (weak, nonatomic) IBOutlet UIView *topLineView;
+-(void)awakeFromNib {
+    
+    [super awakeFromNib];
+    
+    self.backgroundColor = [UIColor clearColor];
+    
+    self.emptyTitleLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.00];
+    self.emptyDescriptionLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.00];
+    
+    self.emptyTitleLabel.font       = [[BBConfig sharedConfig] lightFontWithSize:20];
+    self.emptyDescriptionLabel.font = [[BBConfig sharedConfig] lightFontWithSize:18];
+}
 
-@property (weak, nonatomic) IBOutlet UIButton *closeButton;
-- (IBAction)closeButtonAction:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UILabel *navBarTitleLabel;
-
-// Other Views
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+-(void) setTitle:(NSString *)title description:(NSString *)description {
+    self.emptyTitleLabel.text = title;
+    self.emptyDescriptionLabel.text = description;
+}
 
 @end

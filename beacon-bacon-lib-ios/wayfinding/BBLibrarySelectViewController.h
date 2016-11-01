@@ -1,5 +1,5 @@
 //
-// BBPOIDatasourceDelegate.h
+// BBLibrarySelectViewController.h
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,20 +22,27 @@
 // THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import "BBPOISection.h"
-#import "BBPOI.h"
-#import "BBPOITableViewCell.h"
-#import "BBPOIEmptyTableViewCell.h"
-#import "BBPOISectionHeaderView.h"
-#import "BBPOIMenuItem.h"
-#import "BBLoadingIndicatorCell.h"
+#import <UIKit/UIKit.h>
+#import "BBLibrarySelectDatasourceDelegate.h"
+#import "BBDataManager.h"
+#import "BBConfig.h"
+#import "BBLibrarySelectDelegate.h"
 
-@interface BBPOIDatasourceDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface BBLibrarySelectViewController: UIViewController <BBLibrarySelectDelegate>
 
-// Contains an array of BBPOISection objects
-@property (nonatomic, strong) NSArray *datasource; // <BBPOISection>
+@property (nonatomic, assign) BOOL dismissAsSubview;
 
-@property (nonatomic, weak) UITableView *tableViewRef;
+// Custom Navigation/Top Bar
+@property (weak, nonatomic) IBOutlet UIView *fakeNavigationBar;
+@property (weak, nonatomic) IBOutlet UIView *topLineView;
+
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+- (IBAction)closeButtonAction:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *navBarTitleLabel;
+
+// Other Views
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end

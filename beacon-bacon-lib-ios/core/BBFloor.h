@@ -23,6 +23,7 @@
 #import <Foundation/Foundation.h>
 #import "BBPOILocation.h"
 #import "BBBeaconLocation.h"
+#import "UIColor+Hex.h"
 
 @interface BBFloor : NSObject
 
@@ -45,7 +46,8 @@
 
 @property (nonatomic, assign) NSInteger map_pixel_to_centimeter_ratio;
 
-@property (nonatomic, strong) NSString  *map_walkable_color;
+@property (nonatomic, strong) UIColor  *map_walkable_color;
+@property (nonatomic, strong) UIColor  *map_background_color;
 
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 

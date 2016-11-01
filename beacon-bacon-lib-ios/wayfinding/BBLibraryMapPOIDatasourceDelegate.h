@@ -1,5 +1,5 @@
 //
-// BBPOIEmptyTableViewCell.h
+// BBLibraryMapPOIDatasourceDelegate.h
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,20 +22,20 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "BBConfig.h"
+#import <Foundation/Foundation.h>
+#import "BBPOISection.h"
+#import "BBPOI.h"
+#import "BBPOITableViewCell.h"
+#import "BBEmptyTableViewCell.h"
+#import "BBPOISectionHeaderView.h"
+#import "BBPOIMenuItem.h"
+#import "BBLoadingIndicatorCell.h"
 
-@interface BBPOIEmptyTableViewCell : UITableViewCell
+@interface BBLibraryMapPOIDatasourceDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIImageView *emptyImageView;
+// Contains an array of BBPOISection objects
+@property (nonatomic, strong) NSArray *datasource; // <BBPOISection>
 
-@property (weak, nonatomic) IBOutlet UILabel *emptyTitleLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *emptyDescriptionLabel;
-
-
-// Convinience Usage Functions:
-
--(void) setTitle:(NSString *)title description:(NSString *)description;
+@property (nonatomic, weak) UITableView *tableViewRef;
 
 @end

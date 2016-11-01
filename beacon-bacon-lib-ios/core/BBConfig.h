@@ -29,20 +29,33 @@
 
 @interface BBConfig : NSObject
 
-#define BB_BASE_URL @"https://beaconbacon.nosuchagency.com/api/v1/"
+#define BB_API_VERSION                  @"v1"
 
-#define BB_STORE_KEY_CURRENT_PLACE_ID   @"BB_STORE_KEY_CURRENT_PLACE_ID"
+#define BB_STORE_KEY_API_KEY            @"BB_STORE_KEY_API_KEY"
+#define BB_STORE_KEY_API_BASE_URL       @"BB_STORE_KEY_API_BASE_URL"
 #define BB_STORE_KEY_CUSTOM_COLOR       @"BB_STORE_KEY_CUSTOM_COLOR"
 #define BB_STORE_KEY_REGULAR_FONT       @"BB_STORE_KEY_REGULAR_FONT"
 #define BB_STORE_KEY_LIGHT_FONT         @"BB_STORE_KEY_LIGHT_FONT"
 
-@property (nonatomic, copy) NSString *apiKey;
+typedef NS_ENUM(NSUInteger, BBSSLPinningMode) {
+    BBSSLPinningModeNone,
+    BBSSLPinningModePublicKey
+};
 
+// IMPORTANT: ´apiKey´, ´apiBaseURL´& ´currentPlaceId´ has to be configured
+@property (nonatomic, copy) NSString *apiKey;
+@property (nonatomic, copy) NSString *apiBaseURL;
 @property (nonatomic, copy) NSString *currentPlaceId;
+
+// Default color is [UIColor darkGrayColor];
 @property (nonatomic, strong) UIColor  *customColor;
 
+// Default fonts are both [UIFont systemFontOfSize:16.f];
 @property (nonatomic, strong) UIFont  *regularFont;
 @property (nonatomic, strong) UIFont  *lightFont;
+
+// Default SSL Pinning Mode is BBSSLPinningModeNone
+@property (nonatomic, assign) BBSSLPinningMode SSLPinningMode;
 
 + (instancetype)sharedConfig;
 
@@ -50,5 +63,7 @@
 -(UIFont *)lightFontWithSize:(CGFloat)size;
 
 - (void) setupWithPlaceIdentifier:(NSString *)identifier withCompletion:(void (^)(NSString *placeIdentifier, NSError *error))completionBlock;
+
+- (NSString *) APIURL;
 
 @end

@@ -30,7 +30,7 @@
 #import "BBPlace.h"
 #import "BBFoundSubject.h"
 #import "AFNetworking.h"
-#import "BBIMSRequstSubject.h"
+#import "BBIMSRequstObject.h"
 
 
 @interface BBDataManager : NSObject
@@ -42,6 +42,8 @@
 
 + (BBDataManager *)sharedInstance;
 
+- (void) fetchAllPlacesWithCompletion:(void (^)(NSArray *places, NSError *error))completionBlock;
+
 - (void) fetchPlaceIdFromIdentifier:(NSString *)identifier withCompletion:(void (^)(NSString *placeIdentifier, NSError *error))completionBlock;
 
 - (void) requestPOIMenuItemsWithCompletion:(void (^)(NSArray *result, NSError *error))completionBlock;
@@ -52,6 +54,6 @@
 
 - (void) requestFindASubject:(NSDictionary *)requestDict withCompletion:(void (^)(id result, NSError *error))completionBlock;
 
-- (void) requestFindIMSSubject:(BBIMSRequstSubject *)requstObject withCompletion:(void (^)(BBFoundSubject *result, NSError *error))completionBlock;
+- (void) requestFindIMSSubject:(BBIMSRequstObject *)requstObject withCompletion:(void (^)(BBFoundSubject *result, NSError *error))completionBlock;
 
 @end

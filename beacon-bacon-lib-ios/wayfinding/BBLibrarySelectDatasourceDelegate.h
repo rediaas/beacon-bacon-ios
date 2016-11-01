@@ -1,5 +1,5 @@
 //
-// BBLibraryMapPOIViewController.h
+// BBLibrarySelectDatasourceDelegate.h
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,25 +22,19 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "BBLibraryMapPOIDatasourceDelegate.h"
-#import "BBPOISection.h"
-#import "BBDataManager.h"
-#import "BBConfig.h"
+#import <Foundation/Foundation.h>
+#import "BBPlace.h"
+#import "BBLoadingIndicatorCell.h"
+#import "BBEmptyTableViewCell.h"
+#import "BBLibraryMapViewController.h"
+#import "BBLibrarySelectDelegate.h"
 
-@interface BBLibraryMapPOIViewController: UIViewController
+@interface BBLibrarySelectDatasourceDelegate : NSObject <UITableViewDelegate, UITableViewDataSource>
 
-// Custom Navigation/Top Bar
-@property (weak, nonatomic) IBOutlet UIView *fakeNavigationBar;
-@property (weak, nonatomic) IBOutlet UIView *topLineView;
+// Contains an array of BBPlace objects
+@property (nonatomic, strong) NSArray *datasource; // <BBPlace>
 
-@property (weak, nonatomic) IBOutlet UIButton *closeButton;
-- (IBAction)closeButtonAction:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UILabel *navBarTitleLabel;
-
-// Other Views
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+//@property (nonatomic, weak) id <BBLibrarySelectDelegate> delegate;
+@property (nonatomic, weak) id <BBLibrarySelectDelegate> delegate;
 
 @end

@@ -31,10 +31,13 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedConfig                = [[BBConfig alloc] init];
-        _sharedConfig.currentPlaceId = [[NSUserDefaults standardUserDefaults] valueForKey:BB_STORE_KEY_CURRENT_PLACE_ID];
+        _sharedConfig.currentPlaceId = nil;
         _sharedConfig.customColor    = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:BB_STORE_KEY_CUSTOM_COLOR]];
         _sharedConfig.regularFont    = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:BB_STORE_KEY_REGULAR_FONT]];
         _sharedConfig.lightFont      = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:BB_STORE_KEY_LIGHT_FONT]];
+        _sharedConfig.apiKey         = [[NSUserDefaults standardUserDefaults] valueForKey:BB_STORE_KEY_API_KEY];
+        _sharedConfig.apiBaseURL     = [[NSUserDefaults standardUserDefaults] valueForKey:BB_STORE_KEY_API_BASE_URL];
+        _sharedConfig.SSLPinningMode = BBSSLPinningModeNone;
     });
     return _sharedConfig;
 }
@@ -50,12 +53,8 @@
 - (void) setupWithPlaceIdentifier:(NSString *)identifier withCompletion:(void (^)(NSString *placeIdentifier, NSError *error))completionBlock {
     [[BBDataManager sharedInstance] fetchPlaceIdFromIdentifier:identifier withCompletion:^(NSString *placeIdentifier, NSError *error) {
         if (error == nil && placeIdentifier != nil) {
-            [[NSUserDefaults standardUserDefaults] setObject:placeIdentifier forKey:BB_STORE_KEY_CURRENT_PLACE_ID];
-            [[NSUserDefaults standardUserDefaults] synchronize];
             [BBConfig sharedConfig].currentPlaceId = placeIdentifier;
         } else {
-            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:BB_STORE_KEY_CURRENT_PLACE_ID];
-            [[NSUserDefaults standardUserDefaults] synchronize];
             [BBConfig sharedConfig].currentPlaceId = nil;
         }
         // Handle Completion
@@ -92,6 +91,19 @@
     _lightFont = lightFont;
 }
 
+- (void) setApiKey:(NSString *)apiKey {
+    [[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:BB_STORE_KEY_API_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    _apiKey = apiKey;
+}
 
+- (void) setApiBaseURL:(NSString *)apiBaseURL {
+    [[NSUserDefaults standardUserDefaults] setObject:apiBaseURL forKey:BB_STORE_KEY_API_BASE_URL];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    _apiBaseURL = apiBaseURL;
+}
 
+- (NSString *) APIURL {
+    return [NSString stringWithFormat:@"%@/%@/", [BBConfig sharedConfig].apiBaseURL, BB_API_VERSION];
+}
 @end

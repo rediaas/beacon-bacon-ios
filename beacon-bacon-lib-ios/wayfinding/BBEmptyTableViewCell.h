@@ -1,5 +1,5 @@
 //
-// BBPOIEmptyTableViewCell.m
+// BBEmptyTableViewCell.h
 //
 // Copyright (c) 2016 Mustache ApS
 //
@@ -22,26 +22,20 @@
 // THE SOFTWARE.
 //
 
-#import "BBPOIEmptyTableViewCell.h"
+#import <UIKit/UIKit.h>
+#import "BBConfig.h"
 
-@implementation BBPOIEmptyTableViewCell
+@interface BBEmptyTableViewCell : UITableViewCell
 
--(void)awakeFromNib {
-    
-    [super awakeFromNib];
-    
-    self.backgroundColor = [UIColor clearColor];
-    
-    self.emptyTitleLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.00];
-    self.emptyDescriptionLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.00];
-    
-    self.emptyTitleLabel.font       = [[BBConfig sharedConfig] lightFontWithSize:20];
-    self.emptyDescriptionLabel.font = [[BBConfig sharedConfig] lightFontWithSize:18];
-}
+@property (weak, nonatomic) IBOutlet UIImageView *emptyImageView;
 
--(void) setTitle:(NSString *)title description:(NSString *)description {
-    self.emptyTitleLabel.text = title;
-    self.emptyDescriptionLabel.text = description;
-}
+@property (weak, nonatomic) IBOutlet UILabel *emptyTitleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *emptyDescriptionLabel;
+
+
+// Convinience Usage Functions:
+
+-(void) setTitle:(NSString *)title description:(NSString *)description;
 
 @end
