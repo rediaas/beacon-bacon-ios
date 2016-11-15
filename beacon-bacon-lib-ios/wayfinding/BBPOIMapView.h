@@ -32,6 +32,12 @@
 
 #define BB_POI_WIDTH 36
 
+@property (nonatomic, assign) BOOL titleVisible;
+@property (nonatomic, strong) NSString *title;
+
 @property (nonatomic, strong) UIImageView *poiIconView;
+
+- (void) applyPOIStyle;
+- (void) applyFoundSubjcetStyle;
 
 @end

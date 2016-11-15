@@ -39,6 +39,10 @@
 
 @property (nonatomic, strong) NSArray *floors; // <BBPOIFloor>
 
+@property (nonatomic) BOOL beacon_positioning_enabled;
+@property (nonatomic) BOOL beacon_proximity_enabled;
+
+
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 
 - (BBFloor *) matchingBBFloor:(CLBeacon *)clbeacon;

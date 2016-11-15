@@ -28,11 +28,13 @@
    
     UIView *myPosistionView;
     
-    UIImageView *myPositionImageView;
+//    UIImageView *myPositionImageView;
     
     UIView *pulseView;
     
-    BOOL pulseOut;
+//    BBUserPrecision currentUsetPrecision;
+    
+    CGFloat pulsationScaleToValue;
 }
 
 - (id) initWithFrame:(CGRect)frame {
@@ -41,7 +43,7 @@
         return nil;
     }
     self.backgroundColor = [UIColor clearColor];
-    
+    self.clipsToBounds = NO;
     UIColor *color = [[BBConfig sharedConfig] customColor];
     
     if (pulseView == nil) {
@@ -63,31 +65,58 @@
         [self addSubview:myPosistionView];
     }
     
-    if (myPositionImageView == nil) {
-        CGFloat insetXY = BB_MY_POSITION_INDICATOR_WIDTH/2 - BB_MY_POSITION_ICON_WIDTH/2;
-        myPositionImageView = [[UIImageView alloc] initWithFrame:CGRectMake(insetXY, insetXY, BB_MY_POSITION_ICON_WIDTH, BB_MY_POSITION_ICON_WIDTH)];
-        myPositionImageView.contentMode = UIViewContentModeScaleAspectFit;
-        myPositionImageView.image = [[UIImage imageNamed:@"position-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        myPositionImageView.tintColor = [UIColor whiteColor];
-        [myPosistionView addSubview:myPositionImageView];
-    }
+//    if (myPositionImageView == nil) {
+//        CGFloat insetXY = BB_MY_POSITION_INDICATOR_WIDTH/2 - BB_MY_POSITION_ICON_WIDTH/2;
+//        myPositionImageView = [[UIImageView alloc] initWithFrame:CGRectMake(insetXY, insetXY, BB_MY_POSITION_ICON_WIDTH, BB_MY_POSITION_ICON_WIDTH)];
+//        myPositionImageView.contentMode = UIViewContentModeScaleAspectFit;
+//        myPositionImageView.image = [[UIImage imageNamed:@"position-icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//        myPositionImageView.tintColor = [UIColor whiteColor];
+//        [myPosistionView addSubview:myPositionImageView];
+//    }
 
     
     return self;
 }
 
-- (void) addPulsatingAnimation {
+- (void) setPulsatingAnimationWithMaxWidth:(CGFloat)toValue {
+    
+    pulsationScaleToValue = toValue / BB_MY_POSITION_WIDTH;
+    if (pulsationScaleToValue < 1.2) {
+        pulsationScaleToValue = 1.2;
+    }
     if (pulseView.layer.animationKeys.count > 0) {
         return;
     }
-    CABasicAnimation *pulseViewScaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    pulseViewScaleAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    pulseViewScaleAnimation.duration = 1.6;
-    pulseViewScaleAnimation.repeatCount = HUGE_VAL;
-    pulseViewScaleAnimation.autoreverses = YES;
-    pulseViewScaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-    pulseViewScaleAnimation.toValue = [NSNumber numberWithFloat:0.8];
-    [pulseView.layer addAnimation:pulseViewScaleAnimation forKey:@"scale"];
+    [self addPulsation];
+}
+
+- (void) addPulsation {
+    
+    CGFloat scale = pulsationScaleToValue;
+    
+    [UIView animateWithDuration:1.6 animations:^{
+        pulseView.transform = CGAffineTransformMakeScale(scale, scale);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:1.6 animations:^{
+            pulseView.transform = CGAffineTransformMakeScale(scale * 0.8f, scale * 0.8f);
+        } completion:^(BOOL finished) {
+            [self addPulsation];
+        }];
+    }];
+//    NSLog(@"pulsationScaleToValue: %f",pulsationScaleToValue);
+//    CABasicAnimation *pulseViewScaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+//    pulseViewScaleAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+//    pulseViewScaleAnimation.duration = 1.6;
+//    pulseViewScaleAnimation.autoreverses = YES;
+//    pulseViewScaleAnimation.delegate = self;
+//    pulseViewScaleAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+//    pulseViewScaleAnimation.toValue = [NSNumber numberWithFloat:pulsationScaleToValue];
+//    [pulseView.layer addAnimation:pulseViewScaleAnimation forKey:@"scale"];
+}
+
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    [self addPulsation];
 }
 
 @end
