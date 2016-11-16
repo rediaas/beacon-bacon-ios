@@ -51,12 +51,15 @@
     
     self.nameLabel.text = poi.name;
     self.iconImageView.image = nil;
+    self.iconImageView.contentMode = UIViewContentModeScaleToFill;
     self.iconImageView.layer.sublayers = nil;
 
     if ([poi.type isEqualToString:BB_POI_TYPE_ICON]) {
         [self.iconImageView setImageWithURL:[NSURL URLWithString:poi.icon_url]];
         
     } else if ([poi.type isEqualToString:BB_POI_TYPE_AREA]) {
+        
+        [self layoutIfNeeded];
         [self.iconImageView setImage:[UIImage imageNamed:@"icon-area"]];
         CAShapeLayer *dotLayer = [CAShapeLayer layer];
         dotLayer.fillColor = [[UIColor colorFromHexString:poi.hex_color] colorWithAlphaComponent:0.4].CGColor;

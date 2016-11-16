@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,39 +12,37 @@
             <rect key="frame" x="0.0" y="0.0" width="490" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m6o-3A-a8u" id="dIg-Ox-b7S">
-                <rect key="frame" x="0.0" y="0.0" width="490" height="60"/>
+                <frame key="frameInset" width="490" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCF-r6-1Rk">
-                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="78j-g8-RGR"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vge-ol-BFg">
-                        <rect key="frame" x="68" y="0.0" width="366" height="60"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5k3-hG-wjE">
-                        <rect key="frame" x="442" y="15" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="33W-54-fXI"/>
                             <constraint firstAttribute="height" constant="30" id="vpZ-4U-Vzv"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCF-r6-1Rk">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="hMI-cj-JVv"/>
+                            <constraint firstAttribute="width" constant="36" id="zkM-5A-9KV"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Vge-ol-BFg" firstAttribute="top" secondItem="dIg-Ox-b7S" secondAttribute="top" id="EH5-qq-7VR"/>
                     <constraint firstAttribute="trailing" secondItem="5k3-hG-wjE" secondAttribute="trailing" constant="18" id="JYW-z4-tJr"/>
-                    <constraint firstItem="rCF-r6-1Rk" firstAttribute="leading" secondItem="dIg-Ox-b7S" secondAttribute="leading" id="JcZ-Jd-AEY"/>
                     <constraint firstItem="5k3-hG-wjE" firstAttribute="leading" secondItem="Vge-ol-BFg" secondAttribute="trailing" constant="8" id="K8b-MD-r5l"/>
                     <constraint firstAttribute="bottom" secondItem="Vge-ol-BFg" secondAttribute="bottom" id="Ma6-rf-XNO"/>
-                    <constraint firstItem="Vge-ol-BFg" firstAttribute="leading" secondItem="rCF-r6-1Rk" secondAttribute="trailing" constant="8" id="Md5-d2-20C"/>
+                    <constraint firstItem="rCF-r6-1Rk" firstAttribute="centerY" secondItem="dIg-Ox-b7S" secondAttribute="centerY" id="S8c-xi-UhE"/>
+                    <constraint firstItem="Vge-ol-BFg" firstAttribute="leading" secondItem="rCF-r6-1Rk" secondAttribute="trailing" constant="8" id="SCu-1J-a7h"/>
                     <constraint firstItem="5k3-hG-wjE" firstAttribute="centerY" secondItem="dIg-Ox-b7S" secondAttribute="centerY" id="W9h-F1-ObM"/>
-                    <constraint firstItem="rCF-r6-1Rk" firstAttribute="top" secondItem="dIg-Ox-b7S" secondAttribute="top" id="k40-3i-LxB"/>
-                    <constraint firstAttribute="bottom" secondItem="rCF-r6-1Rk" secondAttribute="bottom" id="nAN-OY-OhI"/>
+                    <constraint firstItem="rCF-r6-1Rk" firstAttribute="leading" secondItem="dIg-Ox-b7S" secondAttribute="leading" constant="12" id="sed-cX-vw3"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -54,4 +53,9 @@
             <point key="canvasLocation" x="452" y="474.5"/>
         </tableViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

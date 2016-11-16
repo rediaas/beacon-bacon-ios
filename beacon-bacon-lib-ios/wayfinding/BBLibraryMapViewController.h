@@ -54,6 +54,8 @@
 #define BB_NOTIFICATION_MAP_NEEDS_LAYOUT    @"BB_NOTIFICATION_MAP_NEEDS_LAYOUT"
 #define BB_NOTIFICATION_MAP_LAYOUT_NOW      @"BB_NOTIFICATION_MAP_LAYOUT_NOW"
 
+#define BB_FADE_DURATION 0.3
+
 // Wayfinding Item
 @property (nonatomic, strong) BBIMSRequstObject *wayfindingRequstObject;
 @property (nonatomic, strong) BBFoundSubject *foundSubject;

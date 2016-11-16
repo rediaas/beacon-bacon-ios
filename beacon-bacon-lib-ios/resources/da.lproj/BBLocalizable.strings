@@ -53,3 +53,6 @@
 "change.map" = "Skift bibliotek";
 
 "error.wayfinding.subject.not.found.for.place" = "'%@' blev ikke fundet på %@. Du kan stadig bruge kortet, eller prøve at skifte bibliotek.";
+
+"ranging.in.progress.title" = "Din placering";
+"ranging.in.progress.message" = "Vi er i gang med at lokalisere din nuværende placering, vi viser den på kortet, så snart vi har fundet den.";

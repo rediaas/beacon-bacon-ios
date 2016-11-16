@@ -285,6 +285,7 @@
                 completionBlock(nil, [self errorSubjectNotFound]);
             }
         } else {
+            completionBlock(nil, [self errorSubjectNotFound]);
         }
     }] resume];
 }

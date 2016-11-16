@@ -38,19 +38,20 @@
     if (!self) {
         return nil;
     }
-    
+    self.clipsToBounds = NO;
+
     return self;
 }
 
 -(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
-    if (nameLabel == nil && !self.areaTitleVisible) {
-        self.areaTitleVisible = YES;
+    if (nameLabel == nil && !self.titleVisible) {
+        self.titleVisible = YES;
         
-        CGRect labelRect = [self.areaTitle boundingRectWithSize:self.bounds.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [[BBConfig sharedConfig] lightFontWithSize:14] } context:nil];
+        CGRect labelRect = [self.title boundingRectWithSize:self.bounds.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [[BBConfig sharedConfig] lightFontWithSize:14] } context:nil];
 
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, labelRect.size.width + 32, labelRect.size.height + 16)];
-        nameLabel.text = self.areaTitle;
+        nameLabel.text = self.title;
         nameLabel.font = [[BBConfig sharedConfig] lightFontWithSize:14];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
@@ -70,12 +71,21 @@
         CGPoint touchPoint = [[touches anyObject] locationInView:self];
         nameLabel.center = CGPointMake(touchPoint.x, touchPoint.y - labelRect.size.height/2 - triangle.frame.size.height);
         
+        nameLabel.alpha = 0;
         [self addSubview:nameLabel];
+        [UIView animateWithDuration:0.3 animations:^{
+            nameLabel.alpha = 1;
+        }];
+    
     } else {
-        self.areaTitleVisible = NO;
+        self.titleVisible = NO;
         if (nameLabel != nil) {
-            [nameLabel removeFromSuperview];
-            nameLabel = nil;
+            [UIView animateWithDuration:0.3 animations:^{
+                nameLabel.alpha = 0;
+            } completion:^(BOOL finished) {
+                [nameLabel removeFromSuperview];
+                nameLabel = nil;
+            }];
         }
     }
 }

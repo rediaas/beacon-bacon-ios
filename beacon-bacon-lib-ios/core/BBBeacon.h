@@ -42,6 +42,7 @@
 @property (nonatomic, assign) NSInteger minor;
 
 @property (nonatomic, strong) NSMutableArray *accuracyDataPoints;
+@property (nonatomic, assign) NSInteger accuracy;
 
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 

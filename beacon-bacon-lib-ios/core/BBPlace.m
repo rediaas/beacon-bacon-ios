@@ -50,7 +50,11 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
-    self.floors = [tmpFloors sortedArrayUsingDescriptors:sortDescriptors];    
+    self.floors = [tmpFloors sortedArrayUsingDescriptors:sortDescriptors];
+    
+    self.beacon_positioning_enabled = (NSUInteger)[[attributes valueForKeyPath:@"beacon_positioning_enabled"] integerValue];
+    self.beacon_proximity_enabled   = (NSUInteger)[[attributes valueForKeyPath:@"beacon_proximity_enabled"] integerValue];
+
     return self;
 }
 

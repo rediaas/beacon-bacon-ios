@@ -27,7 +27,8 @@ You can see an example in using the default wayfinding UI [Beacon Bacon IOS Demo
 [BBConfig sharedConfig].lightFont   = [UIFont fontWithName:@"Avenir-Light" size:16];
 ```
 
-####Start using a specific 'Place':
+####Start using a specific 'BBPlace':
+// NOTE: This is not required before initiating 'BBLibraryMapViewController' - if not set, user will have to choose from a list of available places.
 ```Objective-C
 [[BBConfig sharedConfig] setupWithPlaceIdentifier:@"YOUR_PLACE_ID" withCompletion:^(NSString *placeIdentifier, NSError *error) { 
 ...

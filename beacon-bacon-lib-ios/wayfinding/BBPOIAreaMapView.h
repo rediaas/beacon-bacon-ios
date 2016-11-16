@@ -30,7 +30,7 @@
 
 @interface BBPOIAreaMapView : UIView
 
-@property (nonatomic, assign) BOOL areaTitleVisible;
-@property (nonatomic, strong) NSString *areaTitle;
+@property (nonatomic, assign) BOOL titleVisible;
+@property (nonatomic, strong) NSString *title;
 
 @end

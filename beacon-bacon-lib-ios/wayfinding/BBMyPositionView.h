@@ -26,12 +26,18 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BBConfig.h"
 
-@interface BBMyPositionView : UIView
+//typedef NS_ENUM(NSInteger, BBUserPrecision) {
+//    BBUserPrecisionGood,
+//    BBUserPrecisionAverage,
+//    BBUserPrecisionBad
+//};
+
+@interface BBMyPositionView : UIView <CAAnimationDelegate>
 
 #define BB_MY_POSITION_WIDTH 64
-#define BB_MY_POSITION_INDICATOR_WIDTH 28
+#define BB_MY_POSITION_INDICATOR_WIDTH 20
 #define BB_MY_POSITION_ICON_WIDTH 10
 
-- (void) addPulsatingAnimation;
+- (void) setPulsatingAnimationWithMaxWidth:(CGFloat)toValue;
 
 @end
