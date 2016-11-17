@@ -32,13 +32,37 @@
         return nil;
     }
     
-    self.poi_id         = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
-    self.team_id        = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
-    self.name           = [attributes valueForKeyPath:@"name"];
-    self.internal_name  = [attributes valueForKeyPath:@"internal_name"];
-    self.icon_url       = [attributes valueForKeyPath:@"icon"];
-    self.type           = [attributes valueForKeyPath:@"type"];
-    self.hex_color      = [attributes valueForKeyPath:@"color"];
+    if ([attributes isEqual:[NSNull null]]) {
+        return nil;
+    }
+    
+    if ([attributes valueForKeyPath:@"id"]) {
+        self.poi_id = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"team_id"]) {
+        self.team_id = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"name"]) {
+        self.name = [attributes valueForKeyPath:@"name"];
+    }
+    
+    if ([attributes valueForKeyPath:@"internal_name"]) {
+        self.internal_name  = [attributes valueForKeyPath:@"internal_name"];
+    }
+    
+    if ([attributes valueForKeyPath:@"icon"]) {
+        self.icon_url = [attributes valueForKeyPath:@"icon"];
+    }
+    
+    if ([attributes valueForKeyPath:@"type"]) {
+        self.type = [attributes valueForKeyPath:@"type"];
+    }
+    
+    if ([attributes valueForKeyPath:@"color"]) {
+        self.hex_color = [attributes valueForKeyPath:@"color"];
+    }
     
     self.selected       = NO;
     return self;

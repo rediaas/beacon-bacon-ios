@@ -34,19 +34,46 @@
     if ([attributes isEqual:[NSNull null]]) {
         return nil;
     }
-    self.beacon_id      = (NSUInteger)[[attributes valueForKeyPath:@"beacon_id"] integerValue] ;
-    self.team_id        = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
-    self.place_id       = (NSUInteger)[[attributes valueForKeyPath:@"place_id"] integerValue];
-    self.map_id         = (NSUInteger)[[attributes valueForKeyPath:@"map_id"] integerValue];
-
-    self.name           = [attributes valueForKeyPath:@"name"];
-    self.beacon_description = [attributes valueForKeyPath:@"description"];
-
-    self.beacon_uid     = [attributes valueForKeyPath:@"beacon_uid"];
-    self.proximity_uuid = [attributes valueForKeyPath:@"proximity_uuid"];
-
-    self.major          = (NSUInteger)[[attributes valueForKeyPath:@"major"] integerValue];
-    self.minor          = (NSUInteger)[[attributes valueForKeyPath:@"minor"] integerValue];
+    
+    if ([attributes valueForKeyPath:@"beacon_id"]) {
+        self.beacon_id = (NSUInteger)[[attributes valueForKeyPath:@"beacon_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"team_id"]) {
+        self.team_id = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"place_id"]) {
+        self.place_id = (NSUInteger)[[attributes valueForKeyPath:@"place_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"map_id"]) {
+        self.map_id = (NSUInteger)[[attributes valueForKeyPath:@"map_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"name"]) {
+        self.name = [attributes valueForKeyPath:@"name"];
+    }
+    
+    if ([attributes valueForKeyPath:@"description"]) {
+        self.beacon_description = [attributes valueForKeyPath:@"description"];
+    }
+    
+    if ([attributes valueForKeyPath:@"beacon_uid"]) {
+        self.beacon_uid = [attributes valueForKeyPath:@"beacon_uid"];
+    }
+    
+    if ([attributes valueForKeyPath:@"proximity_uuid"]) {
+        self.proximity_uuid = [attributes valueForKeyPath:@"proximity_uuid"];
+    }
+    
+    if ([attributes valueForKeyPath:@"major"]) {
+        self.major = (NSUInteger)[[attributes valueForKeyPath:@"major"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"minor"]) {
+        self.minor = (NSUInteger)[[attributes valueForKeyPath:@"minor"] integerValue];
+    }
     
     self.accuracyDataPoints = [NSMutableArray new];
     
