@@ -26,6 +26,7 @@
 "showing" = "viser";
 "here.is.your.material" = "Her er dit materiale";
 "your.material.is.at.x" = "Dit materiale befinder sig på %@. Klik på knappen for at få din placering.";
+"your.material.is.at.x.without.positioning" = "Dit materiale befinder sig på %@.";
 "ok.find.me" = "Ok, find mig";
 "you.are.here" = "Du er her";
 "you.are.at" = "Du er på";
@@ -34,8 +35,9 @@
 
 "show.my.position" = "Vis min position";
 "show.material" = "Vis materiale";
-"invalid.current.location.title" = "Din placering";
-"invalid.current.location.message" = "Vi kan ikke finde din aktuelle placering på kortet.\nSørg for at du har aktiveret både Lokations Service og Bluetooth.";
+"invalid.current.location.title" = "Vi kan ikke finde din placering";
+"invalid.current.location.message" = "Sørg for at aktivere bluetooth og tjek eventuelt om du har givet app’en tilladelse til at bruge lokalitet service";
+
 "ok" = "Ok";
 
 "no.points.of.interest.title" = "Ingen interessepunkter";
