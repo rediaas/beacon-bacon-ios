@@ -32,19 +32,38 @@
     if ([attributes isEqual:[NSNull null]]) {
         return nil;
     }
-
     
-    self.location_id    = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
-    self.team_id        = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
-    self.place_id       = (NSUInteger)[[attributes valueForKeyPath:@"place_id"] integerValue];
-    self.map_id         = (NSUInteger)[[attributes valueForKeyPath:@"map_id"] integerValue];
-    self.poi_id         = (NSUInteger)[[attributes valueForKeyPath:@"poi_id"] integerValue];
-
-    self.name           = [attributes valueForKeyPath:@"name"];
+    if ([attributes valueForKeyPath:@"id"]) {
+        self.location_id = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
+    }
     
-    self.posX           = (NSUInteger)[[attributes valueForKeyPath:@"posX"] integerValue];
-    self.posY           = (NSUInteger)[[attributes valueForKeyPath:@"posY"] integerValue];
+    if ([attributes valueForKeyPath:@"team_id"]) {
+        self.team_id = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
+    }
     
+    if ([attributes valueForKeyPath:@"place_id"]) {
+        self.place_id = (NSUInteger)[[attributes valueForKeyPath:@"place_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"map_id"]) {
+        self.map_id = (NSUInteger)[[attributes valueForKeyPath:@"map_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"poi_id"]) {
+        self.poi_id = (NSUInteger)[[attributes valueForKeyPath:@"poi_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"name"]) {
+        self.name = [attributes valueForKeyPath:@"name"];
+    }
+    
+    if ([attributes valueForKeyPath:@"posX"]) {
+        self.posX = (NSUInteger)[[attributes valueForKeyPath:@"posX"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"posY"]) {
+        self.posY = (NSUInteger)[[attributes valueForKeyPath:@"posY"] integerValue];
+    }
     return self;
 }
 

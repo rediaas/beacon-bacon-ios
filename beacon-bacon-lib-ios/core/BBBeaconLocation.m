@@ -29,6 +29,9 @@
     if (!self) {
         return nil;
     }
+    if ([attributes isEqual:[NSNull null]]) {
+        return nil;
+    }
     
     self.beacon = [[BBBeacon alloc] initWithAttributes:attributes[@"beacon"]];
 

@@ -30,50 +30,84 @@
         return nil;
     }
     
-    self.floor_id = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
-    self.team_id = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
-    self.name = [attributes valueForKeyPath:@"name"];
-    
-    self.order = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
-
-    self.image_url = [attributes valueForKeyPath:@"image"];
-
-    NSMutableArray *tmpPOILocations = [NSMutableArray new];
-    NSMutableArray *tmpBeaconLocations = [NSMutableArray new];
-    for (NSDictionary *locationDict in [attributes valueForKeyPath:@"locations"]) {
-        if ([locationDict[@"type"] isEqualToString:@"poi"]) {
-            BBPOILocation *location = [[BBPOILocation alloc] initWithAttributes:locationDict];
-            [tmpPOILocations addObject:location];
-        } else if ([locationDict[@"type"] isEqualToString:@"beacon"]) {
-            BBBeaconLocation *location = [[BBBeaconLocation alloc] initWithAttributes:locationDict];
-            [tmpBeaconLocations addObject:location];
-        } else if ([locationDict[@"type"] isEqualToString:@"ims"]) {
-            // Ignore all IMS
-        } else {
-            // Unknown Type - ingnore at this point (until supported)
-        }
-
+    if ([attributes isEqual:[NSNull null]]) {
+        return nil;
     }
-    self.poiLocations = tmpPOILocations;
-    self.beaconLocations = tmpBeaconLocations;
     
-    self.map_width_in_centimeters = (NSUInteger)[[attributes valueForKeyPath:@"map_width_in_centimeters"] integerValue];
-    self.map_height_in_centimeters = (NSUInteger)[[attributes valueForKeyPath:@"map_height_in_centimeters"] integerValue];
-    self.map_width_in_pixels = (NSUInteger)[[attributes valueForKeyPath:@"map_width_in_pixels"] integerValue];
-    self.map_height_in_pixels = (NSUInteger)[[attributes valueForKeyPath:@"map_height_in_pixels"] integerValue];
+
+    if ([attributes valueForKeyPath:@"id"]) {
+        self.floor_id = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"team_id"]) {
+        self.team_id = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"name"]) {
+        self.name = [attributes valueForKeyPath:@"name"];
+    }
+    
+    if ([attributes valueForKeyPath:@"order"]) {
+        self.order = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"image"]) {
+        self.image_url = [attributes valueForKeyPath:@"image"];
+    }
+    
+    if ([attributes valueForKeyPath:@"locations"]) {
+        NSMutableArray *tmpPOILocations = [NSMutableArray new];
+        NSMutableArray *tmpBeaconLocations = [NSMutableArray new];
+        for (NSDictionary *locationDict in [attributes valueForKeyPath:@"locations"]) {
+            if ([locationDict valueForKeyPath:@"type"]) {
+                if ([locationDict[@"type"] isEqualToString:@"poi"]) {
+                    BBPOILocation *location = [[BBPOILocation alloc] initWithAttributes:locationDict];
+                    [tmpPOILocations addObject:location];
+                } else if ([locationDict[@"type"] isEqualToString:@"beacon"]) {
+                    BBBeaconLocation *location = [[BBBeaconLocation alloc] initWithAttributes:locationDict];
+                    [tmpBeaconLocations addObject:location];
+                } else if ([locationDict[@"type"] isEqualToString:@"ims"]) {
+                    // Ignore all IMS
+                } else {
+                    // Unknown Type - ingnore at this point (until supported)
+                }
+            }
+        }
+        self.poiLocations = tmpPOILocations;
+        self.beaconLocations = tmpBeaconLocations;
+    }
+    
+    if ([attributes valueForKeyPath:@"map_width_in_centimeters"]) {
+        self.map_width_in_centimeters = (NSUInteger)[[attributes valueForKeyPath:@"map_width_in_centimeters"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"map_height_in_centimeters"]) {
+        self.map_height_in_centimeters = (NSUInteger)[[attributes valueForKeyPath:@"map_height_in_centimeters"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"map_width_in_pixels"]) {
+        self.map_width_in_pixels = (NSUInteger)[[attributes valueForKeyPath:@"map_width_in_pixels"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"map_height_in_pixels"]) {
+        self.map_height_in_pixels = (NSUInteger)[[attributes valueForKeyPath:@"map_height_in_pixels"] integerValue];
+    }
     
     self.map_pixel_to_centimeter_ratio = self.map_width_in_pixels / self.map_width_in_centimeters;
     
-    NSString *map_walkable_color = [attributes valueForKeyPath:@"map_walkable_color"];
-    if (map_walkable_color != nil && ![map_walkable_color isEqualToString:@""] ) {
-        self.map_walkable_color = [UIColor colorFromHexString:map_walkable_color];
+    if ([attributes valueForKeyPath:@"map_walkable_color"]) {
+        NSString *map_walkable_color = [attributes valueForKeyPath:@"map_walkable_color"];
+        if (map_walkable_color != nil && ![map_walkable_color isEqualToString:@""] ) {
+            self.map_walkable_color = [UIColor colorFromHexString:map_walkable_color];
+        }
     }
     
-    NSString *map_background_color = [attributes valueForKeyPath:@"map_background_color"];
-    if (map_background_color != nil && ![map_background_color isEqualToString:@""] ) {
-        self.map_background_color = [UIColor colorFromHexString:map_background_color];
+    if ([attributes valueForKeyPath:@"map_background_color"]) {
+        NSString *map_background_color = [attributes valueForKeyPath:@"map_background_color"];
+        if (map_background_color != nil && ![map_background_color isEqualToString:@""] ) {
+            self.map_background_color = [UIColor colorFromHexString:map_background_color];
+        }
     }
-
     return self;
 }
 

@@ -32,6 +32,10 @@
         return nil;
     }
     
+    if ([attributes isEqual:[NSNull null]]) {
+        return nil;
+    }
+    
     if ([attributes objectForKey:@"status"]) {
         self.status = [attributes objectForKey:@"status"];
     }

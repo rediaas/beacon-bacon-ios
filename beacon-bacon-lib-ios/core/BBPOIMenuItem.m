@@ -32,9 +32,22 @@
         return nil;
     }
     
-    self.menu_id         = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
-    self.order           = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
-    self.title           = [attributes valueForKeyPath:@"title"];
+    if ([attributes isEqual:[NSNull null]]) {
+        return nil;
+    }
+    
+    if ([attributes valueForKeyPath:@"id"]) {
+        self.menu_id = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"order"]) {
+        self.order = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"title"]) {
+        self.title = [attributes valueForKeyPath:@"title"];
+    }
+    
     if ([attributes valueForKeyPath:@"poi"] != [NSNull null]) {
         self.poi = [[BBPOI alloc] initWithAttributes:[attributes valueForKeyPath:@"poi"]];
     }

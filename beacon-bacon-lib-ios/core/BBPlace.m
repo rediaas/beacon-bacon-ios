@@ -30,31 +30,64 @@
         return nil;
     }
     
-    self.identifier     = [attributes valueForKeyPath:@"identifier"];
-    self.place_id       = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
-    self.team_id        = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
-    self.name           = [attributes valueForKeyPath:@"name"];
-    
-    self.address        = [attributes valueForKeyPath:@"address"];
-    self.zipcode        = [attributes valueForKeyPath:@"zipcode"];
-    self.city           = [attributes valueForKeyPath:@"city"];
-
-    self.order           = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
-
-    NSMutableArray *tmpFloors = [NSMutableArray new];
-    for (NSDictionary *floorDict in [attributes valueForKeyPath:@"floors"]) {
-        BBFloor *floor = [[BBFloor alloc] initWithAttributes:floorDict];
-        [tmpFloors addObject:floor];
+    if ([attributes isEqual:[NSNull null]]) {
+        return nil;
     }
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    if ([attributes valueForKeyPath:@"identifier"]) {
+        self.identifier = [attributes valueForKeyPath:@"identifier"];
+    }
     
-    self.floors = [tmpFloors sortedArrayUsingDescriptors:sortDescriptors];
+    if ([attributes valueForKeyPath:@"id"]) {
+        self.place_id = (NSUInteger)[[attributes valueForKeyPath:@"id"] integerValue];
+    }
     
-    self.beacon_positioning_enabled = (NSUInteger)[[attributes valueForKeyPath:@"beacon_positioning_enabled"] integerValue];
-    self.beacon_proximity_enabled   = (NSUInteger)[[attributes valueForKeyPath:@"beacon_proximity_enabled"] integerValue];
+    if ([attributes valueForKeyPath:@"team_id"]) {
+        self.team_id = (NSUInteger)[[attributes valueForKeyPath:@"team_id"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"name"]) {
+        self.name = [attributes valueForKeyPath:@"name"];
+    }
+    
+    if ([attributes valueForKeyPath:@"address"]) {
+        self.address = [attributes valueForKeyPath:@"address"];
+    }
+    
+    if ([attributes valueForKeyPath:@"zipcode"]) {
+        self.zipcode = [attributes valueForKeyPath:@"zipcode"];
+    }
+    
+    if ([attributes valueForKeyPath:@"city"]) {
+        self.city = [attributes valueForKeyPath:@"city"];
+    }
 
+    if ([attributes valueForKeyPath:@"order"]) {
+        self.order = (NSUInteger)[[attributes valueForKeyPath:@"order"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"floors"]) {
+        NSMutableArray *tmpFloors = [NSMutableArray new];
+        for (NSDictionary *floorDict in [attributes valueForKeyPath:@"floors"]) {
+            BBFloor *floor = [[BBFloor alloc] initWithAttributes:floorDict];
+            [tmpFloors addObject:floor];
+        }
+        
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        
+        self.floors = [tmpFloors sortedArrayUsingDescriptors:sortDescriptors];
+    }
+    
+    if ([attributes valueForKeyPath:@"beacon_positioning_enabled"]) {
+        self.beacon_positioning_enabled = (NSUInteger)[[attributes valueForKeyPath:@"beacon_positioning_enabled"] integerValue];
+    }
+    
+    if ([attributes valueForKeyPath:@"beacon_proximity_enabled"]) {
+        self.beacon_proximity_enabled = (NSUInteger)[[attributes valueForKeyPath:@"beacon_proximity_enabled"] integerValue];
+    }
+    
     return self;
 }
 
